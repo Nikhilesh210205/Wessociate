@@ -1,0 +1,114 @@
+{% extends 'home.html' %}
+{% block title %}Register{% endblock %}
+
+{%block content%}
+<style>
+  .button-2 button{
+    width: 200px;
+    padding: 15px 0;
+    text-align: center;
+    margin: 20px 10px;
+    border-radius: 25px;
+    font-size: 15px;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.button-2 button:hover{
+    color: black;
+    background-color: white;
+}
+.box{
+   height: 88vh;
+   overflow-y: scroll;
+   margin-bottom: 28px; 
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+}
+/* Styles for scrollbar and container */
+.scrollable-container {
+  height: 300px; /* Set the height of the scrollable container */
+  overflow: hidden; /* Hide any overflowing content */
+  border-radius: 15px; /* Border radius for the container */
+  border: 1px solid #ccc; /* Border for the container */
+  position: relative; /* Position relative for absolute positioning of scrollbar */
+}
+
+.scrollable-content {
+  height: 100%; /* Full height of the content */
+  overflow-y: scroll; /* Enable vertical scrollbar */
+  padding-right: 15px; /* Width of scrollbar, prevents content shifting */
+}
+
+/* Custom scrollbar styles */
+/* For WebKit browsers */
+.scrollable-content::-webkit-scrollbar {
+  width: 10px; /* Width of the scrollbar */
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track color */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+  background: #888; /* Thumb color */
+  border-radius: 10px; /* Border radius of the thumb */
+}
+
+/* For Firefox */
+.scrollable-content {
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: #888 #f1f1f1; /* Thumb and track color */
+}
+  
+
+</style>
+  
+   <div class="login-page" >
+    <div class="box scrollable-content" ><br> 
+    <br><h1 style="color: white; font-size: 40px;">Sign Up!</h1> <br>
+    
+    <a class="btn" href="{%url 'social:begin' 'google-oauth2' %}"  style="width: 80%;   border: 1px solid white; color: black; background-color: white; font-weight: 600;">Continue with  <img src="../static/icons8-google-48.png" alt="" width="25px"></a> <br>
+    <p style="color: white;">or</p>
+    <!-- <i class="fa-brands fa-google fa-2x" style="color: white;"></i> -->
+    <form method="POST" style="text-align: center;">
+      {% csrf_token %}
+      <input type="text" placeholder="Enter username" name="username" id="login-username"  style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid rgb(255, 255, 255); color: white;">
+      <br><br>
+      <input type="password" placeholder="Enter password" name="password1" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <input type="password" placeholder="Re-Enter password" name="password2" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <input type="email" placeholder="Enter email" name="email" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <input type="text" placeholder="First Name" name="first_name" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <input type="text" placeholder="Last Name" name="last_name" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <input type="text" placeholder="Mobile" name="mobile" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <input type="text" placeholder="Profession" name="profession" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <input type="text" placeholder="Address" name="address" id="login-password" style="width: 70%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <div style="width: 80%; display: flex; margin-left: 60px;">
+           <input type="checkbox" name="terms" style="width: 24px;">
+           <p style="color: rgb(149, 147, 147); margin-top: 10px; margin-right: 46px;">I've read and accept the <a href="">Terms & Conditions.</a></p>
+      </div>
+
+      <div class="button-2">
+      <button type="submit"><span></span>Sign Up</button><br>
+      </div>
+      
+  </form> 
+</div></div>
+{%endblock%}
+
+{% block exclude_element %}
+    <!-- Do not include anything here -->
+{% endblock %}

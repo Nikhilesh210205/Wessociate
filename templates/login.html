@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+{% block title %}Login{% endblock %}
+
+{%block content%}
+   <div class="login-page" >
+    <div class="box" style="display: flex; flex-direction: column; align-items: center; background-color: rgba(255, 255, 255, 0.15); /* Adjust the opacity for the glass effect */
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Adjust border color and opacity */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Adjust shadow */
+    color: #fff; /* Text color */
+    "><br> 
+    <br><h1 style="color: white; font-size: 40px;">Sign In!</h1> <br>
+    <a class="btn" href="{%url 'social:begin' 'google-oauth2' %}"  style="width: 70%;   border: 1px solid white; color: black; background-color: white; font-weight: 600;">Continue with  <img src="../static/icons8-google-48.png" alt="" width="25px"></a> <br>
+    <p style="color: white;">or</p>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" placeholder="Enter username" name="username" id="login-username"  style="width: 100%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid rgb(255, 255, 255); color: white;">
+      <br><br>
+      <input type="password" placeholder="Enter password" name="password" id="login-password" style="width: 100%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid white; color: whitesmoke;">
+      <br><br>
+      <div class="button-2">
+      <button type="submit"><span></span>Sign In</button><br>
+      </div>
+      <p style="color: white;">Don't have an account?<a href="register" style="text-decoration: none; ">Sign Up.</a></p><br>
+
+  </form>
+</div></div>
+{%endblock%}

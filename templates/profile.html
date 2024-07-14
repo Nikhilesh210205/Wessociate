@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/23fdf0a18e.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="main-body" style="margin-top: 50px;">
+        
+              <!-- Breadcrumb -->
+              <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/" style="text-decoration: none;">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                </ol>
+              </nav>
+              <!-- /Breadcrumb -->
+        
+              <div class="row gutters-sm">
+                <div style="display: flex; justify-content: flex-end;">
+                  <a href="/details_edit"  style=" text-decoration: none; color: white;background-color: black; width: 25px;  text-align: center; border-radius: 4px;"><i class="fa-regular fa-pen-to-square " style="color: white;"></i> </a>
+                  <!-- <i class="fa-regular fa-pen-to-square " style="color: black;"></i> -->
+                </div>
+                <div class="col-md-4 mb-3">
+                  <div class="card" style="border: 1px black solid;">
+                    <div class="card-body">
+                      <div class="d-flex flex-column align-items-center text-center">
+                        {% if profile.gender == 'Male' %}
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="114" height="114">
+                        {%else%}
+                        <img src="../static/avatar female.png" alt="Admin" class="rounded-circle" width="114" height="114">
+                        {%endif%}
+                        <div class="mt-3" style="width: 50%; text-align: center;">
+                          <h4>{{user.username}}</h4>
+                          <p class="text-secondary mb-1">{{profile.profession}}</p>
+                          <!-- <p class="text-muted font-size-sm">Worked</p> -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-8">
+                  
+                  <div class="card mb-3" style="border: 1px solid black;">
+                    <div class="card-body">
+                      
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Full Name</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{user.first_name}} {{user.last_name}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Email</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                         {{user.email}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Mobile</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{profile.mobile}}
+                        </div>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-sm-3">
+                          <h6 class="mb-0">Address</h6>
+                        </div>
+                        <div class="col-sm-9 text-secondary">
+                          {{profile.address}}
+                        </div>
+                      </div>
+                       
+                    </div>
+                  </div>
+    
+
+                </div>
+              </div>
+            <div style="border: 1px solid black;">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Ideas You Posted</th>
+                        <th scope="col">Posted on</th>
+                        <th scope="col">Your Deal Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for Idea in Ideas %}
+                        <form method="POST">
+                          {% csrf_token %} 
+                      <tr>
+                        <td>{{Idea.idea_title}}</td>
+                        <td>{{Idea.posted_datetime}}</td> 
+                        <td><select name="idea_provider_deal_status" id="idea_provider_deal_status">
+                          <option value="NONE">NONE</option>
+                          <option value="ON">ON</option>
+                          <option value="OFF">OFF</option>
+                        </select></td>
+                        <input type="hidden" name="idea_id" value="{{Idea.id}}">
+                        <input type="hidden" name="idea_provider_username" value="{{user.username}}">
+                        <input type="hidden" name="role" value="idea_provider">
+                        <td><button type="submit">Submit</button></td>
+                      </tr></form>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+            </div> <br><br>
+            <div style="border: 1px solid black;">
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Ideas You Viewed</th>
+                        <th scope="col">Viewed on</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for Ideaviewed in Ideaviewed %} 
+                      <tr>
+                        <td>{{Ideaviewed.Idea.idea_title}}</td>
+                        <td>{{Ideaviewed.viewed_at}}</td>
+                        <td><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#Modal{{Ideaviewed.id}}">View Idea</button></td>
+                      </tr>{% endfor %}
+                    </tbody>
+                  </table>
+            </div>
+            </div>
+            <!-- Button trigger modal
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button> -->
+{% for Ideaviewed in Ideaviewed %} 
+<!-- Modal -->
+     <div class="modal fade" id="Modal{{Ideaviewed.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">{{Ideaviewed.Idea.idea_title}}</h5>
+         <!-- <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>  -->
+       </div>
+      <div class="modal-body">
+        {{Ideaviewed.Idea.idea_description}}
+      </div>
+      <div class="modal-body">
+        {%if Idea_bought %}
+        <a  style="text-decoration: none; color: red; font-weight: 900; font-size: 30px;">Instant Investment Needed: ₹{{Ideaviewed.Idea.idea_instant_investment}} </a><strong style="font-size: 20px; color: blue;">(PAID)</strong><br>
+        <a   style="text-decoration: none; color: red; font-weight: 900; font-size: 30px;">Total Investment Needed: ₹{{Ideaviewed.Idea.idea_total_investment}} </a> <br><br>
+        {% else %}
+        <a  style="text-decoration: none; color: red; font-weight: 900; font-size: 30px;">Instant Investment Needed: ₹{{Ideaviewed.Idea.idea_instant_investment}} </a> <br>
+        <a   style="text-decoration: none; color: red; font-weight: 900; font-size: 30px;">Total Investment Needed: ₹{{Ideaviewed.Idea.idea_total_investment}} </a> <br><br>
+        <!-- <h5 class="card-title">Pay for instant investment: <a href="{%url 'billing' Ideaviewed.Idea_id%}">Click here to pay</a></h5>  <br> -->
+        <h5 class="card-title">Instructions:</h5> 
+        <p class="card-text">1. Investor need to pay instant investment needed to the idea provider in order to get into contact with idea provider.</p>
+        <p class="card-text">2. Payment initially done to the company and later on if the deal is <strong>ON</strong> between the investor and idea provider, then this instantly invested money will be transferred to idea provider.</p>
+        <p class="card-text">3. If the deal between the investor and idea provider is <strong>OFF</strong> then this instantly invested money will be returned.</p>
+         {% endif %}
+      </div>
+      {%for Idea_bought in Idea_bought%}
+      <div class="modal-body" >
+        <div class="row gutters-sm"> 
+          <div class="col-md-13">
+            <div class="card mb-3" style="border: 1px solid black;">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Full Name</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Idea_bought.Idea.idea_posted_by_name}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Email</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Idea_bought.Idea.idea_posted_by_mail}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Mobile</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Idea_bought.Idea.idea_posted_by_mobile}}
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <h6 class="mb-0">Address</h6>
+                  </div>
+                  <div class="col-sm-9 text-secondary">
+                    {{Idea_bought.Idea.idea_posted_by_address}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer"><form method="POST">
+        {% csrf_token %} 
+            <label for="investor_deal_status">Your Deal Status</label>
+          <select name="investor_deal_status" id="investor_deal_status">
+            <option value="NONE">NONE</option>
+            <option value="OFF">OFF</option>
+            <option value="ON">ON</option>
+          </select> 
+          <input type="hidden" name="idea_id" value="{{Idea_bought.Idea.Idea.id}}">
+          <input type="hidden" name="investor_username" value="{{user.username}}">
+          <input type="hidden" name="role" value="investor">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      {%endfor%}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> 
+      </div>
+    </div>
+  </div>
+</div>
+{%endfor%}
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </body>
+  </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/23fdf0a18e.js" crossorigin="anonymous"></script>
+</head>
+<body  style="display: flex; height: 100vh; align-items: center; flex-direction: column; justify-content: center;">
+    <div class="container" style="border: 1px solid black;">
+        <h2>Account: </h2>
+         <p>Username : {{user.username}}</p> 
+         <p>First Name : {{user.first_name}}</p>
+         <p>Last Name : {{user.last_name}}</p>
+    </div>
+   
+    <div class="container" style="border: 1px solid black;">
+        <h2>Ideas you Posted:</h2>
+        {% for Idea in Ideas %}
+        <ul>
+            <li>{{Idea.idea_title}}  </li>
+        </ul>
+        {% endfor %}
+    </div>
+    
+    <div class="container" style="border: 1px solid black;">
+        <h2>Ideas you Viewed:</h2>
+        {% for Ideaviewed in Ideaviewed %}
+        <ul>
+            <li>{{Ideaviewed.Idea.idea_title}}</li>
+        </ul>
+        {% endfor %}
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html> -->

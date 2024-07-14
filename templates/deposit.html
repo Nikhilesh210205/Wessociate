@@ -1,0 +1,152 @@
+{% extends 'home.html' %}
+
+{% block title %}Deposit Tokens{% endblock %}
+<style>
+  /* Style for the dialog box */
+.dialog {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  text-align: center;
+}
+
+/* Style for the close button */
+#close-dialog {
+  background-color: #007BFF;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+#close-dialog:hover {
+  background-color: #0056b3;
+}
+
+</style>
+{%block content%} <br> <br> <br> <br>
+<form  method="POST">
+  {% csrf_token %}
+<div id="instructions-dialog" class="dialog" style="text-align: center; color: white;">
+  <i class="fa-solid fa-face-frown fa-4x"></i> <br> <br>
+  <h4>Sorry for the inconvenience!!</h4>
+  <p>Currently, We are not accepting pay for tokens feature</p>
+  <p>as the website is still under development for minor changes.</p>
+  <p>If you wish to acquire additional tokens, you can raise a request and</p>
+  <p>our team will contact you shortly.</p> <br>
+  <button class="btn btn-primary" type="submit" style="width: 20%; border-radius: 3em;" >Raise a request</button>
+</form>
+</div>
+<!--<div style="display: flex; flex-wrap: wrap; margin-top: 50px; justify-content: space-around;" class="container" >
+    <div class="card shadow-lg" style="width: 18rem; margin-right: 20px; margin-bottom: 20px; background: transparent; border: 2px solid white; ">
+        
+        <div class="card-body">
+          <h5 class="card-title" style="color: white;">Get 120 Tokens</h5><br>
+          <input type="hidden" name="amount" value="100">
+          <button class="btn btn-primary" id="rzp-button1"  style="width: 100%; background: transparent; border-radius: 3em;" disabled>Buy Now For ₹100</button>
+        </div>
+      </div>
+    <div class="card shadow-lg" style="width: 18rem; margin-right: 20px; margin-bottom: 20px; background: transparent; border: 2px solid white;">
+        
+        <div class="card-body">
+          <h5 class="card-title" style="color: white;">Get 250 Tokens</h5><br>
+          <input type="hidden" name="amount" value="200">
+          <button class="btn btn-primary" id="rzp-button2"  style="width: 100%; background: transparent; border-radius: 3em;"  disabled>Buy Now For ₹200</button>
+        </div>
+      </div>
+      <div class="card shadow-lg" style="width: 18rem; margin-right: 20px; margin-bottom: 20px; background: transparent; border: 2px solid white;">
+        
+        <div class="card-body">
+          <h5 class="card-title" style="color: white;">Get 380 Tokens</h5><br>
+          <input type="hidden" name="amount" value="300">
+          <button class="btn btn-primary" id="rzp-button3"  style="width: 100%; background: transparent; border-radius: 3em;" disabled>Buy Now For ₹300</button>
+        </div>
+        
+      </div></div>-->
+      
+<script>
+  // JavaScript to display the dialog when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  var dialog = document.getElementById('instructions-dialog');
+  dialog.style.display = 'block';
+
+  var closeButton = document.getElementById('close-dialog');
+  closeButton.addEventListener('click', function() {
+    dialog.style.display = 'none';
+  });
+});
+
+</script>
+     <!-- <script>
+         var options1 = {
+  "key": "rzp_test_ClH6E4FgEWpPoz", // Enter the Key ID generated from the Dashboard
+  "amount": "10000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  "currency": "INR",
+  "name": "NIKI & TONY", //your business name
+  "description": "Get 120 Tokens",
+  //"order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  "callback_url": "http://localhost:8000/deposit/",
+  
+  "notes": {
+  "address": "Razorpay Corporate Office"
+  },
+  "theme": {
+  "color": "#3399cc"
+  }
+  };
+  var options2 = {
+  "key": "rzp_test_ClH6E4FgEWpPoz", // Enter the Key ID generated from the Dashboard
+  "amount": "20000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  "currency": "INR",
+  "name": "NIKI & TONY", //your business name
+  "description": "Get 250 Tokens",
+  //"order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  "callback_url": "http://localhost:8000/deposit/",
+  
+  "notes": {
+  "address": "Razorpay Corporate Office"
+  },
+  "theme": {
+  "color": "#3399cc"
+  }
+  };
+  var options3 = {
+  "key": "rzp_test_ClH6E4FgEWpPoz", // Enter the Key ID generated from the Dashboard
+  "amount": "30000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  "currency": "INR",
+  "name": "NIKI & TONY", //your business name
+  "description": "Get 380 Tokens",
+  //"order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  "callback_url": "http://localhost:8000/deposit/",
+  
+  "notes": {
+  "address": "Razorpay Corporate Office"
+  },
+  "theme": {
+  "color": "#3399cc"
+  }
+  };
+  var rzp1 = new Razorpay(options1);
+  document.getElementById('rzp-button1').onclick = function(e){
+  rzp1.open();
+  e.preventDefault();
+  }
+  var rzp2 = new Razorpay(options2);
+  document.getElementById('rzp-button2').onclick = function(e){
+  rzp2.open();
+  e.preventDefault();
+  }
+  var rzp3 = new Razorpay(options3);
+  document.getElementById('rzp-button3').onclick = function(e){
+  rzp3.open();
+  e.preventDefault();
+  }
+      </script>-->
+{%endblock%}

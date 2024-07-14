@@ -1,0 +1,24 @@
+{% extends 'home.html' %}
+{% block title %}CONTACT US{% endblock %}
+
+{%block content%}
+   <div class="login-page">
+    <div style=" display: flex;flex-direction: column;height: fit-content; border: 1px solid white;border-bottom-left-radius: 1.3em; border-top-right-radius: 1.3em; text-align: center; width: 800px;  background-color: rgba(255, 255, 255, 0.15); /* Adjust the opacity for the glass effect */
+    padding: 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px); /* Adjust the blur amount as needed */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Adjust border color and opacity */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37); /* Adjust shadow */
+    color: #fff; /* Text color */"><br> 
+    <br><h1 style="color: white; font-size: 40px;">Contact Us</h1> <br>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" name="name" id="name" placeholder="Enter your Username" style="width: 80%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid rgb(255, 255, 255); color: white;"><br><br>
+      <input type="email" name="email" id="email" placeholder="Enter your email address" style="width: 80%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid rgb(255, 255, 255); color: white;"><br><br>
+      <textarea type="text" name="message" placeholder="Enter your Bug Report or any message/grievance you would like to share with us."id="idea-text" style="margin-top: 10px; width: 80%;border: none; border-bottom: 2px solid rgb(255, 255, 255);"></textarea><br><br>
+      <div class="button-2">
+        <button type="submit"><span></span>Submit</button><br>
+    </div>
+  </form>
+</div></div>
+{%endblock%}

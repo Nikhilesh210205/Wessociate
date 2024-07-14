@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+
+{% block title %}Express Your Ideas{% endblock %}
+
+{%block content%}
+<style>
+  .idea-box{
+    width: 60vw; 
+    justify-content: center;
+    display: flex;
+    flex-direction: column; 
+    border: 1px solid white;
+    border-bottom-left-radius: 1.3em; 
+    border-top-right-radius: 1.3em; 
+    text-align: center;
+    overflow: hidden;
+  }
+  @media (max-width : 940px ) {
+    .idea-box{
+      width: 90%;
+    }
+  }
+  .example_idea{
+    text-decoration: none;
+  }
+  .example_idea:hover{
+    text-decoration: underline;
+  }
+</style>
+<div class="login-page">
+<div class="idea-box"  >
+    <form method="POST"  >
+        {% csrf_token %} 
+        <textarea type="text" name="title" placeholder="Title of the idea."id="idea-text" style="margin-top: 40px; width: 70%; resize: none; height: 70px;"></textarea><br><br>
+        <textarea type="text" name="description" placeholder="Elaborate the idea (without giving away the key factor of it)."  id="idea-text" style="width: 70%; resize: none; height: 70px;"></textarea><br><br>
+        <label for="industry" style="color: rgba(255, 255, 255, 0.632); margin-left: 0px; border-bottom: 2px solid rgb(255, 255, 255); padding-bottom: 7.3px; ">INDUSTRY :</label>
+          <select name="industry" id="industry" style="width: 59%; height: 2.5em; background: transparent; border: none; border-bottom: 2px solid rgb(255, 255, 255);color: white; outline: none; ">
+            <option value="Technology" style="color: black;" >Technology</option>
+            <option value="Food" style="color: black; ">Food</option>
+            <option value="Retail Store" style="color: black;">Retail Store</option>
+            <option value="Entertainment" style="color: black;">Entertainment</option>
+            <option value="Fashion" style="color: black;">Fashion</option>
+            <option value="Sports" style="color: black;">Sports</option>
+            <option value="Education" style="color: black;">Education</option>
+            <option value="Transportation" style="color: black;">Transportation</option>
+            <option value="Real Estate" style="color: black;">Real Estate</option>
+            <option value="Travel" style="color: black;">Travel</option>
+            <option value="Agriculture" style="color: black;">Agriculture</option>
+            <option value="Other" style="color: black;">Other</option>
+          </select> <br><br>
+        <i class="fa-solid fa-indian-rupee-sign " style=" color: white;"></i>   <input type="number" name="instant investment" placeholder="    Instant investment(Quote the amount)."><br><br>
+        <i class="fa-solid fa-indian-rupee-sign " style=" color: white;"></i>   <input type="number" name="total investment" placeholder="    Total investment(Quote the amount)."><br><br>
+        <button type="submit" id="idea-btn" ><span></span>Post Your Idea</button> <br>
+        <a href="/example_idea" class="example_idea" style="color: white; padding: 10px;">View an example idea</a> <br> <br>
+    </form>
+</div></div>
+{%endblock%}
