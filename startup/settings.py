@@ -143,24 +143,3 @@ STATICFILES_DIRS = [
 
 
 #   -----> Added Manually <------
-# STRIPE_SECRET_KEY = 'sk_test_51O2pyjSAqZsWCh4K2gh3t44GiItfwZYVBGZUfoMKTp6c2fVRAKjMy3uj0gMvVEDpIcneQ9VaFWsaODfYUJ2KcSgg00julN8EdE'
-# STRIPE_PUBLISHABLE_KEY = 'pk_test_51O2pyjSAqZsWCh4Kopb5TIaAxFCH2Vi4Ij0kPrBHik3IcZuxAof9kNm9pHzqQ0K9gKwTzblS67j0t0R78wo2bzAd00SQ94fEOu'
-
-AUTHENTICATION_BACKENDS = [
-    'social_core.backends.google.GoogleOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-]
-LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'home'
-LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'home'
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '897569541691-q43d621ujtlfgnuqijf1vjnsjvgfclh2.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
-
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'admin@wessociate.com'
-EMAIL_HOST_PASSWORD = 'dsso yaow jgpn ddyo'
